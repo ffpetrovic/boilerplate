@@ -11,4 +11,4 @@
 - Monorepo?
 - Add authentication in clients
 - Improve `.gitignore` files
-- trpc
+- ~~trpc~~
