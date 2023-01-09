@@ -1,13 +1,12 @@
-import {BuildProcedure, inferAsyncReturnType, Router} from "@trpc/server";
+import {BuildProcedure, inferAsyncReturnType} from "@trpc/server";
 import { initTRPC } from '@trpc/server';
 import * as trpcNext from "@trpc/server/adapters/next";
 import {z} from "zod";
 import {OpenApiMeta} from "trpc-openapi";
 import {prisma} from "./prisma";
-import {appRouter} from "./router";
+import {router as appRouter} from "../index";
 
 export const t = initTRPC.meta<OpenApiMeta>().context<Context>().create();
-export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export async function createContext(opts: trpcNext.CreateNextContextOptions) {
