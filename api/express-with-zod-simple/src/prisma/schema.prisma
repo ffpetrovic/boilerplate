@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider              = "zod-prisma"
+  output                = "./zod"
+  relationModel         = "true"
+  useDecimalJs          = "true"
+  modelCase             = "PascalCase"
+  prismaJsonNullability = "true"
+  modelSuffix           = "DatabaseModel"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String         @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  remoteUserId      String         @unique @db.VarChar(32)
+  name              String         @unique @db.VarChar
+  createdAt         DateTime       @default(now())
+  lastChangedAt     DateTime
+  nameLastChangedAt DateTime?
+  bannedTo          DateTime?
+  RefreshToken      RefreshToken[]
+}
+
+model RefreshToken {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  expiresOn DateTime
+  userId    String   @db.Uuid
+  User      User     @relation(fields: [userId], references: [id])
+}
