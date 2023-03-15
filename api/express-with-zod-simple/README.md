@@ -4,7 +4,7 @@
 - Inter-endpoint call support
 
 ### To-Do
-- [ ] env variable
+- [x] env variable
 - [ ] find a better way to define models without repeating the model name
 - [ ] lint
 - [ ] refactor "endpoint" to functions, to be an actual callable function, not `endpoint.handler()`
