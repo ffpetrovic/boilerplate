@@ -1,5 +1,5 @@
 import * as z from "zod"
-import { CompleteRefreshToken, RelatedRefreshTokenDatabaseModel } from "./refreshtoken"
+import { CompleteRefreshToken, RelatedRefreshTokenDatabaseModel } from "./index"
 
 export const UserDatabaseModel = z.object({
   id: z.string(),
