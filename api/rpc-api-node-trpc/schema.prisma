@@ -3,13 +3,13 @@ generator client {
 }
 
 generator zod {
-  provider                 = "zod-prisma"
-  output                   = "./zod"
-  relationModel            = true
-  modelCase                = "PascalCase"
-  modelSuffix              = "Model"
-  useDecimalJs             = true
-  prismaJsonNullability    = true
+  provider              = "zod-prisma"
+  output                = "./zod"
+  relationModel         = false
+  modelCase             = "PascalCase"
+  modelSuffix           = "DatabaseModel"
+  useDecimalJs          = true
+  prismaJsonNullability = true
 }
 
 datasource db {

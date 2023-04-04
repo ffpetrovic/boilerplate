@@ -1,15 +1,13 @@
 import {z} from "zod";
 import {createProcedure} from "../utils/trpc";
+import {testProcedure} from "./testProcedure";
+import {models} from "../utils/models";
 
-const { procedure, handler, input, output } = createProcedure('query', {
-    input: z.object({ id: z.string() }),
-    output: z.object({ id: z.string(), name: z.string() }),
-    handler: async ({ ctx, input: { id } }) => {
-        return {
-            id,
-            name: 'Test Name',
-        }
-    }
+export const getUser = createProcedure('query', {
+    input: z.object({ }),
+    output: z.object({ user: models.UserResponseModel.nullable(), test: testProcedure.output }),
+    handler: async ({ ctx }) => ({
+        user: await ctx.db.user.findFirst(),
+        test: await testProcedure.handler({ ctx, input: {} })
+    })
 })
-
-export const getUser = { procedure, handler, input, output }
